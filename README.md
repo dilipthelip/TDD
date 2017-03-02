@@ -1,6 +1,6 @@
 # TDD
 
-This tutorial is about TDD and uses different frameworks to use TDD.
+This tutorial is about TDD and different frameworks to use TDD.
 
 ## Mockito
 
