@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -45,7 +45,7 @@ public class ItemServiceTest {
     public void getItem_Mock_Call(){
 
        when(daoMock.getItem(anyInt())).thenReturn(new Item());
-       Item item = service.getItem(0);
+       Optional<Item> item = service.getItem(0);
 
         assertNotNull(item);
 
@@ -55,10 +55,21 @@ public class ItemServiceTest {
     public void getItem_Real_Call(){
 
         when(daoMock.getItem(anyInt())).thenCallRealMethod();
-        Item item = service.getItem(0);
+        Optional<Item> item = service.getItem(0);
 
         assertNotNull(item);
-        assertEquals(123,item.getItemId().intValue());
+        assertEquals(123,item.get().getItemId().intValue());
+
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getItem_Exception(){
+
+        when(daoMock.getItem(anyInt())).thenThrow(new RuntimeException());
+        Optional<Item> item = service.getItem(0);
+
+        assertNotNull(item);
+        assertEquals(123,item.get().getItemId().intValue());
 
     }
 

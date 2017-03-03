@@ -14,6 +14,10 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+project.ext {
+	lombokVersion = '1.16.4'
+}
+
 jar {
 	baseName = 'learn-tdd'
 	version = '0.0.1-SNAPSHOT'
@@ -25,6 +29,11 @@ repositories {
 	mavenCentral()
 }
 
+configurations {
+	all*.exclude module: 'log4j-over-slf4j'
+	//all*.exclude group: 'org.apache.log4j'
+}
+
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -33,4 +42,6 @@ dependencies {
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile "org.projectlombok:lombok:${lombokVersion}"
+
 }
