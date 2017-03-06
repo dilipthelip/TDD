@@ -29,6 +29,7 @@ public class ItemService {
 
         }catch (Exception e){
             log.error("Exception in service : getItem : "+ e.getMessage() );
+            throw  e;
         }
         return  item;
     }
