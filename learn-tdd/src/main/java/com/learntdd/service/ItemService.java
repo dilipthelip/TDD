@@ -33,4 +33,15 @@ public class ItemService {
         }
         return  item;
     }
+
+    public boolean insertItem(Item item) {
+        return itemDao.insertItem();
+    }
+
+    public boolean updateItem(int itemId) {
+
+        Item item = new Item();
+        item.setItemId(itemId);
+        return itemDao.updateItem(item);
+    }
 }

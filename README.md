@@ -115,3 +115,45 @@ Optional<Item> item1 = service.getItem(0);
 verifyNoMoreInteractions(daoMock);
 assertNotNull(item);
 ```
+
+### void Method calls:
+
+
+### Verification Order:
+
+### Capturing Arguments:
+
+Using the input arguments you are constructing an object and the method does not return that object. In that case you need to validate that object , we can use Mocktio argument matchers to handle this scenario.
+
+ArgumentCaptor allows you to capture the actual object passed in to the mock.
+
+Check the below code snippet to fetch the object that was constructed and validated.  
+
+```
+when(daoMock.updateItem(anyObject())).thenReturn(true);
+       int itemVal = 1;
+       boolean result =  service.updateItem(itemVal);
+
+       assertTrue(result);
+
+       ArgumentCaptor<Item> itemCaptor = ArgumentCaptor.forClass(Item.class);
+
+       verify(daoMock).updateItem(itemCaptor.capture());
+
+       Item item = itemCaptor.getValue();
+
+       assertEquals(itemVal,(int) item.getItemId());
+```
+
+### Partial Mocking:
+
+- Partial mocking mixes controlled invocation stubs with real method calls.
+
+Things to keep in mind:   
+- Cannot mock final methods.
+- Cannot mock private methods.
+- Set the state appropriately.
+
+When stubbing a spy the initial call is routed to the real method.  
+
+### Power Mock:

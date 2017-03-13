@@ -9,6 +9,16 @@ public class Item {
     private String itemDesc;
     private String sku;
 
+    public Item(int i, String desc, String sku) {
+        this.itemId=i;
+        this.itemDesc=desc;
+        this.sku=sku;
+    }
+
+    public Item() {
+
+    }
+
     public Integer getItemId() {
         return itemId;
     }

@@ -18,4 +18,13 @@ public class ItemDao {
         item.setSku("SKKKHU");
         return item;
     }
+
+    public boolean insertItem() {
+        return  true;
+    }
+
+    public boolean updateItem(Item item) {
+
+        return true;
+    }
 }
